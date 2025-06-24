@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Prompt Interface</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    
+
+    <main class="main-content">
+      <h1>Metaf-Oracle</h1>
+      <p>Please ask the Oracle of Metaph a complex question.</p>
+
+      <form id="promptForm">
+        <select type="select" class="section-header">
+          <option value="GPT4o-mini">GPT4o-mini</option></select>
+
+        
+          <div>
+            <label for="prompt">Enter your prompt</label>
+            <textarea id="prompt" name="prompt" placeholder="Type your question or prompt here..." required></textarea>
+          </div>
+        </div>
+
+
+        <div class="button-container">
+          <button type="submit">request</button>
+        </div>
+      </form>
+
+      <div class="loading" id="loading">
+        <p>the Oracle is thinking...</p>
+      </div>
+
+      <div id="response"></div>
+      <img id="image" />
+    </main>
+
+    <script>
+      document.getElementById('promptForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const prompt = document.getElementById('prompt').value;
+        const loadingElement = document.getElementById('loading');
+        const responseElement = document.getElementById('response');
+        const imageElement = document.getElementById('image');
+
+        // Show loading indicator
+        loadingElement.style.display = 'block';
+        responseElement.style.display = 'none';
+        imageElement.style.display = 'none';
+
+        // Show loading indicator
+        loadingElement.style.display = 'block';
+        responseElement.style.display = 'none';
+
+
+        try {
+          const response = await fetch('/openai', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt }),
+          });
+
+          const data = await response.json();
+
+          // Display the response
+          responseElement.textContent = data.metaphor;
+          responseElement.style.display = 'block';
+          imageElement.src = data.imageUrl;
+          imageElement.style.display = 'block';
+
+        } catch (error) {
+          responseElement.textContent = 'Error: ' + error.message;
+          responseElement.style.display = 'block';
+        } finally {
+          // Hide loading indicator
+          loadingElement.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>
