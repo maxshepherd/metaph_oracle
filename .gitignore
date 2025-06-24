@@ -1,0 +1,16 @@
+
+
+# This is a sample .gitignore file for a Node.js project
+# It ignores common files and directories that should not be committed to the repository
+node_modules/
+dist/
+.env
+
+
+# Logs
+**/
+*.log
+npm-debug.log*      
+# Dependency directories
+jspm_packages/
+
