@@ -85,7 +85,7 @@ async function getOpenAIResponseWithPrompt(prompt: string): Promise<string> {
       {
         role: 'system',
         content:
-          'You are a master of the metaphor and simile. You make complex problems simple and easy to understand with your mental models, and all in under 200 words.',
+          'You are a master of the metaphor and simile. You make complex problems simple and easy to understand helping the user to visualize concepts through singular mental models, and all in under 200 words.',
       },
       { role: 'user', content: prompt },
     ],
